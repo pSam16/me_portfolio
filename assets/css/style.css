@@ -334,14 +334,14 @@ ul{
         }
 
         .filter-btn:hover {
-            border-color: var(--primary-orange);
+            border-color: #03CAD6;
             color: var(--text-light);
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
         }
 
         .filter-btn.active {
-            border-color: var(--primary-orange);
+            border-color: #03CAD6;
             color: var(--primary-orange);
             background: rgba(255, 107, 53, 0.1);
             box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
@@ -658,4 +658,5 @@ ul{
                 font-size: 2rem;
             }
         }
+
 
