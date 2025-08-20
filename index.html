@@ -455,12 +455,7 @@ It was popularised in the 1960s with the release of  software like Aldus PageMak
 
 
 
-<div class="js-cursor">
-  <div class="c-cursor__inner c-cursor__inner--circle js-cursor-inner">
-    <div class="c-cursor__side c-cursor__side--left js-cursor-right"></div>
-    <div class="c-cursor__side c-cursor__side--right js-cursor-left"></div>
-  </div>
-</div>
+<div class="cursor"></div>
 
     
 
@@ -788,19 +783,34 @@ class Cursor {
 }
 
 // Custom mouse cursor
-const cursor = new Cursor(document.querySelector(".js-cursor"));
+(function () {
+      const link = document.querySelectorAll('nav > .hover-this');
+      const cursor = document.querySelector('.cursor');
+      const animateit = function (e) {
+            const span = this.querySelector('span');
+            const { offsetX: x, offsetY: y } = e,
+            { offsetWidth: width, offsetHeight: height } = this,
+            move = 25,
+            xMove = x / width * (move * 2) - move,
+            yMove = y / height * (move * 2) - move;
+            span.style.transform = `translate(${xMove}px, ${yMove}px)`;
+            if (e.type === 'mouseleave') span.style.transform = '';
+      };
+      const editCursor = e => {
+            const { clientX: x, clientY: y } = e;
+            cursor.style.left = x + 'px';
+            cursor.style.top = y + 'px';
+      };
+      link.forEach(b => b.addEventListener('mousemove', animateit));
+      link.forEach(b => b.addEventListener('mouseleave', animateit));
+      window.addEventListener('mousemove', editCursor);
+})();
 
-// Activate the enter/leave/click methods of the custom cursor when hovering in/out on every <a> (and the close content ctrl)
-const links = document.querySelectorAll(".js-link");
-
-[...links].forEach(link => {
-    link.addEventListener("mouseenter", () => cursor.enter());
-    link.addEventListener("mouseleave", () => cursor.leave());
-  });
         </script>
 
 </body>
 </html>
+
 
 
 
